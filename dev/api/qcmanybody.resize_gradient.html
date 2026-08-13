@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>resize_gradient &mdash; QCManyBody 0.1.dev1+g82de02b53 documentation</title>
+  <title>resize_gradient &mdash; QCManyBody 0.1.dev1+g27e98f6ab documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=bd2a09c3"></script>
+      <script src="../_static/documentation_options.js?v=1317e8d4"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/version-switcher.js?v=55f02482"></script>
@@ -104,12 +104,12 @@
 <h1>resize_gradient<a class="headerlink" href="#resize-gradient" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="qcmanybody.resize_gradient">
-<span class="sig-prename descclassname"><span class="pre">qcmanybody.</span></span><span class="sig-name descname"><span class="pre">resize_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fragment_size_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fragment_slice_dict</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><span class="pre">ndarray</span></a></span></span><a class="reference internal" href="../_modules/qcmanybody/utils.html#resize_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qcmanybody.resize_gradient" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">qcmanybody.</span></span><span class="sig-name descname"><span class="pre">resize_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fragment_size_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fragment_slice_dict</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span></span><a class="reference internal" href="../_modules/qcmanybody/utils.html#resize_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qcmanybody.resize_gradient" title="Link to this definition"></a></dt>
 <dd><p>Pads or extracts a gradient array between subsystem and full supersystem sizes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>grad</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – Gradient matrix of natural size for <em>bas</em>, (3 * _&lt;nat in bas&gt;_, 3).
+<li><p><strong>grad</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – Gradient matrix of natural size for <em>bas</em>, (3 * _&lt;nat in bas&gt;_, 3).
 If <cite>reverse=True</cite>, gradient matrix of supersystem size, (3 * _&lt;nat of all fragments&gt;_, 3).</p></li>
 <li><p><strong>bas</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.10/library/typing.html#typing.Tuple" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3.10/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3.10/library/constants.html#Ellipsis" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">...</span></code></a>]</span>) – 1-indexed fragments active in <em>grad</em>.
 If <cite>reverse=True</cite>, 1-indexed fragments to be extracted from <em>grad</em>.</p></li>
@@ -125,7 +125,7 @@ For He–HOOH–Me cluster, <cite>{1: slice(0, 1), 2: slice(1, 5), 3: slice(5, 1
 If reverse=True, gradient array extracted to natural size, <cite>(3 * _&lt;nat in bas&gt;_, 3)</cite>.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)">numpy.ndarray</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)">numpy.ndarray</a></p>
 </dd>
 </dl>
 </dd></dl>
