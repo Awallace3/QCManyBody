@@ -44,11 +44,6 @@ jobs:
             runs-on: ubuntu-latest
             pytest: "-k 'examples or (121-nwchem_psi4 and 4b)'"
 
-          - label: QCSk-next
-            python-version: "3.12"
-            runs-on: ubuntu-latest
-            pytest: "-k '((not (he4 and (3b or 4b) and not sio)) or supersys) and not vmfc'"
-
     name: "🐍 ${{ matrix.cfg.python-version }} • ${{ matrix.cfg.label }} • ${{ matrix.cfg.runs-on }}"
     runs-on: ${{ matrix.cfg.runs-on }}
 
@@ -63,16 +58,14 @@ jobs:
           name: test
           channels:
             - conda-forge
-            - conda-forge/label/qcelemental_dev
-            - conda-forge/label/qcengine_dev
           dependencies:
             # Build
             - setuptools
             - setuptools-scm
             # Core
             - python
-            - qcelemental >=0.50.0rc5
-            - qcengine >=0.50rc1  # TODO temp
+            - qcelemental >=0.50.4
+            - qcengine >=0.50.0
             - pydantic
             # Testing
             - pytest
@@ -94,14 +87,8 @@ jobs:
           fi
           if [[ "${{ matrix.cfg.label }}" == "Demo" ]]; then
             :
-              sed -i "s;#- dummy1;- psi4=1.9.1;g" export.yaml
-              sed -i "s;#- dummy3;- libint=2.9.0=*_4;g" export.yaml
-              sed -i "s;#- dummy2;- nwchem;g" export.yaml
-          fi
-          if [[ "${{ matrix.cfg.label }}" == "QCSk-next" ]]; then
-              sed -i "s;pydantic;pydantic=2;g" export.yaml
               sed -i "s;#- dummy1;- psi4;g" export.yaml
-              sed -i "s;#- dummy2;- pydantic-settings;g" export.yaml
+              sed -i "s;#- dummy2;- nwchem;g" export.yaml
           fi
           if [[ "${{ matrix.cfg.label }}" == "Py-314" ]]; then
               sed -i "s;#- nwchem;- nwchem;g" export.yaml
@@ -204,15 +191,13 @@ jobs:
           name: test
           channels:
             - conda-forge
-            - conda-forge/label/qcelemental_dev
-            - conda-forge/label/qcengine_dev
           dependencies:
             # Build
             - setuptools
             - setuptools-scm
             # Core
             - python
-            - qcelemental >=0.50.0rc5
+            - qcelemental >=0.50.4
             # Docs
             - numpydoc
             - docutils
