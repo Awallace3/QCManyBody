@@ -150,9 +150,9 @@ def test_print_nbody_energy_external_potential_without_total_energy():
 
     rows = [line for line in stdout.splitlines() if "§A" in line and "N/A" in line]
     assert rows == [
-        "              §A  1                   N/A        N/A                         N/A"
+        "              §A  1                   N/A        N/A                   N/A"
         "                   0.000000000000        0.000000000000",
-        "     FULL/RTN §A  2                   N/A        N/A                         N/A"
+        "     FULL/RTN §A  2                   N/A        N/A                   N/A"
         "                   0.005150000059        3.231673826977",
     ]
     assert "nan" not in stdout.lower()
