@@ -455,7 +455,8 @@ def collect_vars(
     Returns
     -------
     dict
-        _description_. Empty return if *embedding* enabled.
+        Many-body result properties. Interaction properties are omitted when *embedding* or *external_potential* is
+        enabled; valid total and n-body contribution properties remain.
     """
     bsse = bsse.lower()
     prop = prop.lower()
