@@ -148,9 +148,13 @@ def test_print_nbody_energy_external_potential_without_total_energy():
         external_potential=True,
     )
 
-    rows = [line.split() for line in stdout.splitlines() if "§A" in line and "N/A" in line]
-    assert len(rows) == 2
-    assert all(row[-5:-2] == ["N/A", "N/A", "N/A"] for row in rows)
+    rows = [line for line in stdout.splitlines() if "§A" in line and "N/A" in line]
+    assert rows == [
+        "              §A  1                   N/A        N/A                         N/A"
+        "                   0.000000000000        0.000000000000",
+        "     FULL/RTN §A  2                   N/A        N/A                         N/A"
+        "                   0.005150000059        3.231673826977",
+    ]
     assert "nan" not in stdout.lower()
 
     properties = qcmb.utils.collect_vars(

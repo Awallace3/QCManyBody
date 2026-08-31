@@ -391,8 +391,9 @@ def print_nbody_energy(
             total_e = f"{energy_body_dict[nb]:20.12f}" if tot_e else f'{"N/A":>20}'
 
             if interaction_data_unavailable:
-                int_e = f'{"N/A":>20}'
-                int_e_kcal = f'{"N/A":>20}'
+                # Retain the established table alignment for unavailable interaction energies.
+                int_e = f'      {"N/A":<20}'
+                int_e_kcal = f'      {"N/A":<14}'
             else:
                 interaction_energy = energy_body_dict[nb] - energy_body_dict[1]
                 int_e = f"{interaction_energy:20.12f}"
