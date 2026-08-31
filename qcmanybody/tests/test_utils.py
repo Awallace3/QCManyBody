@@ -201,6 +201,26 @@ def test_print_nbody_energy_preserves_legacy_spacing():
         "        N/A                   N/A                 ",
     ]
 
+    external_supersystem = qcmb.utils.print_nbody_energy(
+        {1: -1.0, 2: -0.9},
+        "Counterpoise Corrected (CP)",
+        2,
+        labels,
+        embedding=False,
+        supersystem_ie_only=True,
+        supersystem_beyond=None,
+        external_potential=True,
+    )
+    external_supersystem_rows = [
+        line for line in external_supersystem.splitlines() if "§A" in line and "Legend" not in line
+    ]
+    assert external_supersystem_rows == [
+        "              §A  1       -1.000000000000        N/A                   N/A"
+        "                   0.000000000000        0.000000000000",
+        "     FULL/RTN §A  2       -0.900000000000                   N/A                   N/A"
+        "        N/A                   N/A                 ",
+    ]
+
 
 @pytest.mark.parametrize("hin,bas,reverse,hans", [
     pytest.param(f3hesses["full"], [1, 2, 3], False, f3hesses["full"]),  # idempotent

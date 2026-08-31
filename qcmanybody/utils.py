@@ -370,6 +370,9 @@ def print_nbody_energy(
     previous_e = energy_body_dict[1]
     tot_e = previous_e != 0.0
     interaction_data_unavailable = embedding or external_potential
+    # Preserve the historical numeric-field offsets while replacing only the
+    # literal unavailable ``nan`` token with ``N/A``.
+    unavailable_interaction = f"{np.nan:20.12f}".replace("nan", "N/A")
     nbody_range = list(energy_body_dict)
     if supersystem_ie_only:
         nbody_range = [1, nfragments]
@@ -395,12 +398,12 @@ def print_nbody_energy(
             if supersystem_ie_only and nb == nfragments:
                 if tot_e:
                     if interaction_data_unavailable:
-                        info += f"""  {lbl:>11} {mclbl:2} {nb:2}  {energy_body_dict[nb]:20.12f}  {"N/A":>20}  {"N/A":>20}        {"N/A":20}  {"N/A":20}\n"""
+                        info += f"""  {lbl:>11} {mclbl:2} {nb:2}  {energy_body_dict[nb]:20.12f}  {unavailable_interaction}  {unavailable_interaction}        {"N/A":20}  {"N/A":20}\n"""
                     else:
                         info += f"""  {lbl:>11} {mclbl:2} {nb:2}  {energy_body_dict[nb]:20.12f}  {int_e:20.12f}  {int_e_kcal:20.12f}        {"N/A":20}  {"N/A":20}\n"""
                 else:
                     if interaction_data_unavailable:
-                        info += f"""  {lbl:>11} {mclbl:2} {nb:2}        {"N/A":14}  {"N/A":>20}  {"N/A":>20}        {"N/A":20}  {"N/A":20}\n"""
+                        info += f"""  {lbl:>11} {mclbl:2} {nb:2}        {"N/A":14}  {unavailable_interaction}  {unavailable_interaction}        {"N/A":20}  {"N/A":20}\n"""
                     else:
                         info += f"""  {lbl:>11} {mclbl:2} {nb:2}        {"N/A":14}  {int_e:20.12f}  {int_e_kcal:20.12f}        {"N/A":20}  {"N/A":20}\n"""
             else:
@@ -411,7 +414,7 @@ def print_nbody_energy(
                         info += f"""  {lbl:>11} {mclbl:2} {nb:2}  {energy_body_dict[nb]:20.12f}  {int_e:20.12f}  {int_e_kcal:20.12f}  {delta_e:20.12f}  {delta_e_kcal:20.12f}\n"""
                 else:
                     if interaction_data_unavailable:
-                        info += f"""  {lbl:>11} {mclbl:2} {nb:2}        {"N/A":14}  {"N/A":>20}  {"N/A":>20}  {delta_e:20.12f}  {delta_e_kcal:20.12f}\n"""
+                        info += f"""  {lbl:>11} {mclbl:2} {nb:2}        {"N/A":14}  {unavailable_interaction}  {unavailable_interaction}  {delta_e:20.12f}  {delta_e_kcal:20.12f}\n"""
                     else:
                         info += f"""  {lbl:>11} {mclbl:2} {nb:2}        {"N/A":14}  {int_e:20.12f}  {int_e_kcal:20.12f}  {delta_e:20.12f}  {delta_e_kcal:20.12f}\n"""
             previous_e = energy_body_dict[nb]
