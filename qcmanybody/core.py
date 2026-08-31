@@ -551,8 +551,9 @@ class ManyBodyCore:
                '["mp2", [1, 2], [1, 2]]': {'energy': -5.73, 'gradient': array([[ 0., 0., 0.0053], [ 0., 0., -0.0053]])},
               }
         external_potential
-            Whether the component calculations use fragment-scoped external potentials. Interaction energies are
-            unavailable in the printed energy summary because the component Hamiltonians differ.
+            Whether the component calculations use fragment-scoped external potentials. Because the component
+            Hamiltonians differ, interaction energies are unavailable in the printed summary and interaction-energy
+            properties are omitted from the returned results. This classification is distinct from charge embedding.
 
         """
 
