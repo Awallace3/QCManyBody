@@ -156,7 +156,7 @@ jobs:
 
     - name: PyTest
       run: |
-        pytest -rws -v ${{ matrix.cfg.pytest }} \
+        python -m pytest qcmanybody/tests -rws -v ${{ matrix.cfg.pytest }} \
             --cov=qcmanybody --cov-report=xml \
             --color=yes --durations 50 --durations-min 20
 
