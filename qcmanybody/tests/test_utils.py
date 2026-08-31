@@ -136,6 +136,30 @@ def test_resize_gradient(gin, bas, reverse, gans):
     assert compare_values(gans, gout, atol=1e-5, label="resize_gradient")
 
 
+def test_print_nbody_energy_external_potential_without_total_energy():
+    stdout = qcmb.utils.print_nbody_energy(
+        {1: 0.0, 2: 0.005150000059},
+        "Counterpoise Corrected (CP)",
+        2,
+        {1: ("model", "§A"), 2: ("model", "§A")},
+        embedding=False,
+        supersystem_ie_only=False,
+        supersystem_beyond=None,
+        external_potential=True,
+    )
+
+    rows = [line.split() for line in stdout.splitlines() if "§A" in line and "N/A" in line]
+    assert len(rows) == 2
+    assert all(row[-5:-2] == ["N/A", "N/A", "N/A"] for row in rows)
+    assert "nan" not in stdout.lower()
+
+    properties = qcmb.utils.collect_vars(
+        "cp", "energy", {1: 0.0, 2: 0.005150000059}, 2, external_potential=True
+    )
+    assert "cp_corrected_2_body_contribution_to_energy" in properties
+    assert not any("interaction" in name for name in properties)
+
+
 @pytest.mark.parametrize("hin,bas,reverse,hans", [
     pytest.param(f3hesses["full"], [1, 2, 3], False, f3hesses["full"]),  # idempotent
     pytest.param(f3hesses["full"], [1, 2, 3], True, f3hesses["full"]),  # idempotent
