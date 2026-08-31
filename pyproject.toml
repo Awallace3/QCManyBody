@@ -89,7 +89,7 @@ pythonpath = [
     "tests",
 ]
 testpaths = [
-    "qcmanybody/tests",
+    "tests",
 ]
 markers = [
     "addon: tests require external non-required software",

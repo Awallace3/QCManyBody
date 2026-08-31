@@ -388,25 +388,32 @@ def print_nbody_energy(
 
         if nb in nbody_range:
             delta_e = energy_body_dict[nb] - previous_e
-            total_e = f"{energy_body_dict[nb]:20.12f}" if tot_e else f'{"N/A":>20}'
-
-            if interaction_data_unavailable:
-                # Retain the established table alignment for unavailable interaction energies.
-                int_e = f'      {"N/A":<20}'
-                int_e_kcal = f'{"N/A":<14}'
-            else:
-                interaction_energy = energy_body_dict[nb] - energy_body_dict[1]
-                int_e = f"{interaction_energy:20.12f}"
-                int_e_kcal = f"{interaction_energy * constants.hartree2kcalmol:20.12f}"
-
+            delta_e_kcal = delta_e * constants.hartree2kcalmol
+            if not interaction_data_unavailable:
+                int_e = energy_body_dict[nb] - energy_body_dict[1]
+                int_e_kcal = int_e * constants.hartree2kcalmol
             if supersystem_ie_only and nb == nfragments:
-                delta_e = f'{"N/A":>20}'
-                delta_e_kcal = f'{"N/A":>20}'
+                if tot_e:
+                    if interaction_data_unavailable:
+                        info += f"""  {lbl:>11} {mclbl:2} {nb:2}  {energy_body_dict[nb]:20.12f}  {"N/A":>20}  {"N/A":>20}        {"N/A":20}  {"N/A":20}\n"""
+                    else:
+                        info += f"""  {lbl:>11} {mclbl:2} {nb:2}  {energy_body_dict[nb]:20.12f}  {int_e:20.12f}  {int_e_kcal:20.12f}        {"N/A":20}  {"N/A":20}\n"""
+                else:
+                    if interaction_data_unavailable:
+                        info += f"""  {lbl:>11} {mclbl:2} {nb:2}        {"N/A":14}  {"N/A":>20}  {"N/A":>20}        {"N/A":20}  {"N/A":20}\n"""
+                    else:
+                        info += f"""  {lbl:>11} {mclbl:2} {nb:2}        {"N/A":14}  {int_e:20.12f}  {int_e_kcal:20.12f}        {"N/A":20}  {"N/A":20}\n"""
             else:
-                delta_e_kcal = f"{delta_e * constants.hartree2kcalmol:20.12f}"
-                delta_e = f"{delta_e:20.12f}"
-
-            info += f"  {lbl:>11} {mclbl:2} {nb:2}  {total_e}  {int_e}  {int_e_kcal}  {delta_e}  {delta_e_kcal}\n"
+                if tot_e:
+                    if interaction_data_unavailable:
+                        info += f"""  {lbl:>11} {mclbl:2} {nb:2}  {energy_body_dict[nb]:20.12f}        {"N/A":20}  {"N/A":14}  {delta_e:20.12f}  {delta_e_kcal:20.12f}\n"""
+                    else:
+                        info += f"""  {lbl:>11} {mclbl:2} {nb:2}  {energy_body_dict[nb]:20.12f}  {int_e:20.12f}  {int_e_kcal:20.12f}  {delta_e:20.12f}  {delta_e_kcal:20.12f}\n"""
+                else:
+                    if interaction_data_unavailable:
+                        info += f"""  {lbl:>11} {mclbl:2} {nb:2}        {"N/A":14}  {"N/A":>20}  {"N/A":>20}  {delta_e:20.12f}  {delta_e_kcal:20.12f}\n"""
+                    else:
+                        info += f"""  {lbl:>11} {mclbl:2} {nb:2}        {"N/A":14}  {int_e:20.12f}  {int_e_kcal:20.12f}  {delta_e:20.12f}  {delta_e_kcal:20.12f}\n"""
             previous_e = energy_body_dict[nb]
         else:
             info += f"""  {lbl:>11} {"":2} {nb:2}        {"N/A":20}  {"N/A":20}  {"N/A":20}  {"N/A":20}  {"N/A":20}\n"""
